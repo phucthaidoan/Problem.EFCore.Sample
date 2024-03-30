@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Problem.EFCore.Sample.Data;
+using Problem.EFCore.Infrastructure.Data;
 
 #nullable disable
 
-namespace Problem.EFCore.Sample.Migrations
+namespace Problem.EFCore.Infrastructure.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
-    partial class TodoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240330160134_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -22,7 +25,7 @@ namespace Problem.EFCore.Sample.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Problem.EFCore.Sample.Data.Entities.Plan", b =>
+            modelBuilder.Entity("Problem.EFCore.Infrastructure.Data.Entities.Plan", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -80,7 +83,7 @@ namespace Problem.EFCore.Sample.Migrations
 
             modelBuilder.Entity("Problem.EFCore.Sample.Data.Entities.Todo", b =>
                 {
-                    b.HasOne("Problem.EFCore.Sample.Data.Entities.Plan", "Plan")
+                    b.HasOne("Problem.EFCore.Infrastructure.Data.Entities.Plan", "Plan")
                         .WithMany("Todos")
                         .HasForeignKey("PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -89,7 +92,7 @@ namespace Problem.EFCore.Sample.Migrations
                     b.Navigation("Plan");
                 });
 
-            modelBuilder.Entity("Problem.EFCore.Sample.Data.Entities.Plan", b =>
+            modelBuilder.Entity("Problem.EFCore.Infrastructure.Data.Entities.Plan", b =>
                 {
                     b.Navigation("Todos");
                 });

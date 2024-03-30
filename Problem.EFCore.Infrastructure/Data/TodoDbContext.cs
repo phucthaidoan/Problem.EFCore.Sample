@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Problem.EFCore.Infrastructure.Data.Entities;
 using Problem.EFCore.Sample.Data.Entities;
 
-namespace Problem.EFCore.Sample.Data
+namespace Problem.EFCore.Infrastructure.Data
 {
     public class TodoDbContext : DbContext
     {

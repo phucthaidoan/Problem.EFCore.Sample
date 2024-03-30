@@ -1,32 +1,27 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Problem.EFCore.Sample.Data.Entities;
-using Problem.EFCore.Sample.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Problem.EFCore.Infrastructure.Data;
 
-namespace Problem.EFCore.Sample.Events
+namespace TotoFunctionApp
 {
-    public class TodoToogleNotification : INotification
+    public interface IPlanService
     {
-        public Guid TodoId { get; set; }
-        public bool ToogleValue { get; set; }
-        public DateTime OccurredDate { get; set; }
+        Task HandleTodoToogleAsync(TodoToogleEvent @event);
     }
 
-    public class TodoToogleNotificationHandler : INotificationHandler<TodoToogleNotification>
+    public class PlanService : IPlanService
     {
         private readonly TodoDbContext _dbContext;
 
-        public TodoToogleNotificationHandler(TodoDbContext dbContext)
+        public PlanService(TodoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-
-        public async Task Handle(TodoToogleNotification notification, CancellationToken cancellationToken)
+        public async Task HandleTodoToogleAsync(TodoToogleEvent @event)
         {
             var planData = await _dbContext
                 .Plans
-                .Where(plan => plan.Todos.Any(todo => todo.Id == notification.TodoId))
+                .Where(plan => plan.Todos.Any(todo => todo.Id == @event.TodoId))
                 .Select(plan => new
                 {
                     Plan = plan,

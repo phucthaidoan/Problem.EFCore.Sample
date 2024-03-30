@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Problem.EFCore.Infrastructure.Data;
+using Problem.EFCore.Infrastructure.Data.Entities;
 using Problem.EFCore.Sample.Data;
 using Problem.EFCore.Sample.Data.Entities;
 using Problem.EFCore.Sample.Events;

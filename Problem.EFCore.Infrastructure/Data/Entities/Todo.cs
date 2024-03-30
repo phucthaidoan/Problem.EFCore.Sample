@@ -1,4 +1,6 @@
-﻿namespace Problem.EFCore.Sample.Data.Entities
+﻿using Problem.EFCore.Infrastructure.Data.Entities;
+
+namespace Problem.EFCore.Sample.Data.Entities
 {
     public class Todo
     {

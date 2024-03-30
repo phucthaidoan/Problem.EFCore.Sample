@@ -1,5 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
+using Problem.EFCore.Infrastructure;
+using Problem.EFCore.Infrastructure.Data;
+using Problem.EFCore.Infrastructure.Options;
 using Problem.EFCore.Sample.Data;
 using Problem.EFCore.Sample.Events;
 
@@ -25,8 +28,11 @@ namespace Problem.EFCore.Sample
             });
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<ITodoService, TodoService>();
+            builder.Services.AddScoped<IAzureStorageQueueService, AzureStorageQueueService>();
 
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoToogleNotificationHandler>());
+
+            builder.Services.Configure<AzureStorageOption>(builder.Configuration.GetSection(AzureStorageOption.OptionName));
 
             var app = builder.Build();
 

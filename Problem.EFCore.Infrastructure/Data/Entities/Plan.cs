@@ -1,4 +1,6 @@
-﻿namespace Problem.EFCore.Sample.Data.Entities
+﻿using Problem.EFCore.Sample.Data.Entities;
+
+namespace Problem.EFCore.Infrastructure.Data.Entities
 {
     public class Plan
     {

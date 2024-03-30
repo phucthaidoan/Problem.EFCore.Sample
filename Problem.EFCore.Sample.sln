@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Problem.EFCore.Sample", "Problem.EFCore.Sample.csproj", "{89CDBC42-009A-4455-8B26-CA85754B1160}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Problem.EFCore.Sample", "Problem.EFCore.Sample\Problem.EFCore.Sample.csproj", "{89CDBC42-009A-4455-8B26-CA85754B1160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TotoFunctionApp", "TotoFunctionApp\TotoFunctionApp.csproj", "{DBC47A31-0BF3-483A-9252-3CDD039E3BE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Problem.EFCore.Infrastructure", "Problem.EFCore.Infrastructure\Problem.EFCore.Infrastructure.csproj", "{31AD97FD-1D3F-4EC4-AE15-3CA5697C7CD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{89CDBC42-009A-4455-8B26-CA85754B1160}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{89CDBC42-009A-4455-8B26-CA85754B1160}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{89CDBC42-009A-4455-8B26-CA85754B1160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBC47A31-0BF3-483A-9252-3CDD039E3BE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBC47A31-0BF3-483A-9252-3CDD039E3BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBC47A31-0BF3-483A-9252-3CDD039E3BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBC47A31-0BF3-483A-9252-3CDD039E3BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31AD97FD-1D3F-4EC4-AE15-3CA5697C7CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31AD97FD-1D3F-4EC4-AE15-3CA5697C7CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31AD97FD-1D3F-4EC4-AE15-3CA5697C7CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31AD97FD-1D3F-4EC4-AE15-3CA5697C7CD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
