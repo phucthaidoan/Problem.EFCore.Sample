@@ -34,6 +34,8 @@ namespace Problem.EFCore.Sample.Data
             {
                 var todoEntity = entry.Entity;
                 var isOriginalTaskDone = false;
+                // when entity is not tracked by dbcontext, it is not able to determine the original value
+                entry.OriginalValues.SetValues(await entry.GetDatabaseValuesAsync());
                 entry.OriginalValues.TryGetValue(nameof(Todo.IsDone), out isOriginalTaskDone);
 
                 var isCurrentTaskDone = false;

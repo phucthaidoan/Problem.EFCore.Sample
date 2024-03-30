@@ -131,6 +131,7 @@ namespace Problem.EFCore.Sample
             var todo = await _dbContext
                 .Todos
                 .Where(todo => todo.Id == todoId)
+                .AsNoTracking()
                 .FirstOrDefaultAsync();
             if (todo is null)
             {
@@ -139,6 +140,7 @@ namespace Problem.EFCore.Sample
 
             todo.IsDone = request.IsDone;
             todo.UpdatedDate = DateTime.Now;
+            _dbContext.Update(todo);
             await _dbContext.SaveChangesAsync();
         }
     }
