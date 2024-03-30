@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Problem.EFCore.Sample.Data;
 using Problem.EFCore.Sample.Data.Entities;
+using Problem.EFCore.Sample.Events;
 
 namespace Problem.EFCore.Sample
 {
@@ -107,10 +109,12 @@ namespace Problem.EFCore.Sample
     public class TodoService : ITodoService
     {
         private readonly TodoDbContext _dbContext;
+        private readonly IPublisher _publisher;
 
-        public TodoService(TodoDbContext dbContext)
+        public TodoService(TodoDbContext dbContext, IPublisher publisher)
         {
             _dbContext = dbContext;
+            _publisher = publisher;
         }
 
         public async Task CreateAsync(Guid planId, CreateTodoRequest request)
@@ -140,6 +144,13 @@ namespace Problem.EFCore.Sample
             todo.IsDone = request.IsDone;
             todo.UpdatedDate = DateTime.Now;
             await _dbContext.SaveChangesAsync();
+
+            await _publisher.Publish(new TodoToogleNotification
+            {
+                OccurredDate = DateTime.Now,
+                ToogleValue = request.IsDone,
+                TodoId = todo.Id
+            });
         }
     }
 }

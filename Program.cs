@@ -1,7 +1,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using Problem.EFCore.Sample.Data;
-using Problem.EFCore.Sample.Interceptors;
+using Problem.EFCore.Sample.Events;
 
 namespace Problem.EFCore.Sample
 {
@@ -18,15 +18,16 @@ namespace Problem.EFCore.Sample
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddSingleton<UpdatePlanToBeCompletedInterceptor>();
             builder.Services.AddDbContext<TodoDbContext>((sp, options) =>
             {
                 options
-                .UseSqlServer("Server=LAPTOP-IAJ1J0A2;Database=todo_01simple;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true")
-                .AddInterceptors(sp.GetRequiredService<UpdatePlanToBeCompletedInterceptor>());
+                    .UseSqlServer("Server=LAPTOP-IAJ1J0A2;Database=todo_01simple;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
             });
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<ITodoService, TodoService>();
+
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoToogleNotificationHandler>());
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
