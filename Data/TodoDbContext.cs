@@ -17,6 +17,7 @@ namespace Problem.EFCore.Sample.Data
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
+            // TODO if multiple todo entities are from the same plan => let's resolve it!
             await HandleModifiedTodoEntitiesAsync();
 
             return await base.SaveChangesAsync(cancellationToken);
