@@ -139,50 +139,7 @@ namespace Problem.EFCore.Sample
 
             todo.IsDone = request.IsDone;
             todo.UpdatedDate = DateTime.Now;
-
-            todo.CompletedDate = request.IsDone ? DateTime.Now : null;
-
-            await CheckToCompletePlanAsync(new CheckToCompletePlanModel
-            {
-                PlanId = todo.PlanId,
-                IsTaskDone = request.IsDone,
-                TaskToToogleDoneId = todo.Id
-            });
             await _dbContext.SaveChangesAsync();
-        }
-
-        private async Task CheckToCompletePlanAsync(CheckToCompletePlanModel model)
-        {
-            var planData = await _dbContext
-                .Plans
-                .Where(plan => plan.Id == model.PlanId)
-                .Select(plan => new
-                {
-                    Plan = plan,
-                    HasTodoItemNotDone = plan
-                        .Todos
-                        .Where(todo => todo.Id != model.TaskToToogleDoneId)
-                        .Any(todo => !todo.IsDone)
-                })
-                .FirstOrDefaultAsync();
-
-            if (planData is null)
-            {
-                throw new Exception("Plan not found");
-
-            }
-
-            var isAllItemsDone = model.IsTaskDone && !planData.HasTodoItemNotDone;
-            if (!isAllItemsDone)
-            {
-                planData.Plan.UpdatedDate = DateTime.Now;
-                planData.Plan.CompletedDate = null;
-            }
-            else
-            {
-                planData.Plan.UpdatedDate = DateTime.Now;
-                planData.Plan.CompletedDate = DateTime.Now;
-            }
         }
     }
 }
