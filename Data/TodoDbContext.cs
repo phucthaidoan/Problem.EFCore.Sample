@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Problem.EFCore.Sample.Data.Entities;
 
 namespace Problem.EFCore.Sample.Data
