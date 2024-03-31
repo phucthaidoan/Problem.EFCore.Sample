@@ -26,7 +26,7 @@ namespace Problem.EFCore.Sample
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<ITodoService, TodoService>();
 
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoToogleNotificationHandler>());
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoToogleEventHandler>());
 
             var app = builder.Build();
 

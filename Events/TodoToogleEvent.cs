@@ -5,28 +5,28 @@ using Problem.EFCore.Sample.Data;
 
 namespace Problem.EFCore.Sample.Events
 {
-    public class TodoToogleNotification : INotification
+    public class TodoToogleEvent : INotification
     {
         public Guid TodoId { get; set; }
         public bool ToogleValue { get; set; }
         public DateTime OccurredDate { get; set; }
     }
 
-    public class TodoToogleNotificationHandler : INotificationHandler<TodoToogleNotification>
+    public class TodoToogleEventHandler : INotificationHandler<TodoToogleEvent>
     {
         private readonly TodoDbContext _dbContext;
 
-        public TodoToogleNotificationHandler(TodoDbContext dbContext)
+        public TodoToogleEventHandler(TodoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
 
-        public async Task Handle(TodoToogleNotification notification, CancellationToken cancellationToken)
+        public async Task Handle(TodoToogleEvent todoToogleEvent, CancellationToken cancellationToken)
         {
             var planData = await _dbContext
                 .Plans
-                .Where(plan => plan.Todos.Any(todo => todo.Id == notification.TodoId))
+                .Where(plan => plan.Todos.Any(todo => todo.Id == todoToogleEvent.TodoId))
                 .Select(plan => new
                 {
                     Plan = plan,
