@@ -1,6 +1,4 @@
 ﻿using MediatR;
-using Problem.EFCore.Infrastructure;
-using System.Text.Json;
 
 namespace Problem.EFCore.Sample.Events
 {
@@ -13,16 +11,16 @@ namespace Problem.EFCore.Sample.Events
 
     public class TodoToogleEventHandler : INotificationHandler<TodoToogleEvent>
     {
-        private readonly IAzureStorageQueueService _azureStorageQueueService;
-
-        public TodoToogleEventHandler(IAzureStorageQueueService azureStorageQueueService)
+        private readonly ILogger<TodoToogleEventHandler> _logger;
+        public TodoToogleEventHandler(ILogger<TodoToogleEventHandler> logger)
         {
-            _azureStorageQueueService = azureStorageQueueService;
+            _logger = logger;
         }
 
-        public async Task Handle(TodoToogleEvent notification, CancellationToken cancellationToken)
+        public  Task Handle(TodoToogleEvent notification, CancellationToken cancellationToken)
         {
-            await _azureStorageQueueService.InsertMessageAsync("todoqueue", JsonSerializer.Serialize(notification));
+            _logger.LogInformation("Todo toogle event handler executing");
+            return Task.CompletedTask;
         }
     }
 }

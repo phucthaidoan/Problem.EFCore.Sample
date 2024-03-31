@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Problem.EFCore.Application;
 using Problem.EFCore.Infrastructure.Data;
 using Problem.EFCore.Infrastructure.Data.Entities;
-using Problem.EFCore.Sample.Data;
 using Problem.EFCore.Sample.Data.Entities;
 using Problem.EFCore.Sample.Events;
+using System.Text.Json;
 
 namespace Problem.EFCore.Sample
 {
@@ -146,7 +147,6 @@ namespace Problem.EFCore.Sample
             todo.IsDone = request.IsDone;
             todo.UpdatedDate = DateTime.Now;
             todo.CompletedDate = todo.IsDone ? DateTime.Now : null;
-            await _dbContext.SaveChangesAsync();
 
             await _publisher.Publish(new TodoToogleEvent
             {
@@ -154,6 +154,15 @@ namespace Problem.EFCore.Sample
                 ToogleValue = request.IsDone,
                 TodoId = todo.Id
             });
+
+            await _dbContext
+                .AddAsync(new OutboxMessage
+                {
+                    OccurredOn = DateTime.Now,
+                    Type = typeof(TodoToogleNotification).FullName,
+                    Data = JsonSerializer.Serialize(new TodoToogleNotification(todo.Id))
+                });
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace TotoFunctionApp
         {
             var planData = await _dbContext
                 .Plans
-                .Where(plan => plan.Todos.Any(todo => todo.Id == @event.TodoId))
+                .Where(plan => plan.Todos.Any(todo => todo.Id == @event.Id))
                 .Select(plan => new
                 {
                     Plan = plan,

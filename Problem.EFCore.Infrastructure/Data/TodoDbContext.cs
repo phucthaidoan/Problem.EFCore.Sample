@@ -12,6 +12,7 @@ namespace Problem.EFCore.Infrastructure.Data
 
         public DbSet<Todo> Todos { get; set; }
         public DbSet<Plan> Plans { get; set; }
+        public DbSet<OutboxMessage> OutboxMessages { get; set; }
 
     }
 }
