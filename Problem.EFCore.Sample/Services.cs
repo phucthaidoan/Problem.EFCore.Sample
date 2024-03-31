@@ -145,9 +145,10 @@ namespace Problem.EFCore.Sample
 
             todo.IsDone = request.IsDone;
             todo.UpdatedDate = DateTime.Now;
+            todo.CompletedDate = todo.IsDone ? DateTime.Now : null;
             await _dbContext.SaveChangesAsync();
 
-            await _publisher.Publish(new TodoToogleNotification
+            await _publisher.Publish(new TodoToogleEvent
             {
                 OccurredDate = DateTime.Now,
                 ToogleValue = request.IsDone,

@@ -30,7 +30,7 @@ namespace Problem.EFCore.Sample
             builder.Services.AddScoped<ITodoService, TodoService>();
             builder.Services.AddScoped<IAzureStorageQueueService, AzureStorageQueueService>();
 
-            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoToogleNotificationHandler>());
+            builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<TodoToogleEventHandler>());
 
             builder.Services.Configure<AzureStorageOption>(builder.Configuration.GetSection(AzureStorageOption.OptionName));
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Problem.EFCore.Infrastructure.Data;
+using TotoFunctionApp.Events;
 
 namespace TotoFunctionApp
 {

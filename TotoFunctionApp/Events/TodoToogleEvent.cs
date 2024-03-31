@@ -1,4 +1,4 @@
-﻿namespace TotoFunctionApp
+﻿namespace TotoFunctionApp.Events
 {
     public class TodoToogleEvent
     {
