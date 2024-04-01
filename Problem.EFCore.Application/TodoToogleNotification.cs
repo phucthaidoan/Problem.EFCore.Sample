@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Problem.EFCore.Core.Application;
+﻿using Problem.EFCore.Core.Application;
 using System.Text.Json.Serialization;
 namespace Problem.EFCore.Application
 {
