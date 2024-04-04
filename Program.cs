@@ -19,10 +19,12 @@ namespace Problem.EFCore.Sample
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddSingleton<UpdatePlanToBeCompletedInterceptor>();
+            var connectionString = builder.Configuration.GetSection("DbConnectionString").Value;
+
             builder.Services.AddDbContext<TodoDbContext>((sp, options) =>
             {
                 options
-                .UseSqlServer("Server=LAPTOP-IAJ1J0A2;Database=todo_01simple;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true")
+                .UseSqlServer(connectionString)
                 .AddInterceptors(sp.GetRequiredService<UpdatePlanToBeCompletedInterceptor>());
             });
             builder.Services.AddScoped<IPlanService, PlanService>();
