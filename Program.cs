@@ -18,10 +18,11 @@ namespace Problem.EFCore.Sample
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            var connectionString = builder.Configuration.GetSection("DbConnectionString").Value;
             builder.Services.AddDbContext<TodoDbContext>((sp, options) =>
             {
                 options
-                    .UseSqlServer("Server=LAPTOP-IAJ1J0A2;Database=todo_01simple;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
+                    .UseSqlServer(connectionString);
             });
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<ITodoService, TodoService>();
