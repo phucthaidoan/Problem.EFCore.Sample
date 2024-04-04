@@ -1,6 +1,0 @@
-@Problem.EFCore.Sample_HostAddress = http://localhost:5048
-
-GET {{Problem.EFCore.Sample_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

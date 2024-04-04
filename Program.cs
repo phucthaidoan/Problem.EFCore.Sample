@@ -1,4 +1,5 @@
 
+using Microsoft.EntityFrameworkCore;
 using Problem.EFCore.Sample.Data;
 
 namespace Problem.EFCore.Sample
@@ -15,7 +16,13 @@ namespace Problem.EFCore.Sample
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<TodoDbContext>();
+
+            var connectionString = builder.Configuration.GetSection("DbConnectionString").Value;
+
+            builder.Services.AddDbContext<TodoDbContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
             builder.Services.AddScoped<IPlanService, PlanService>();
             builder.Services.AddScoped<ITodoService, TodoService>();
             var app = builder.Build();
