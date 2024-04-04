@@ -9,7 +9,7 @@ namespace Problem.EFCore.Infrastructure
         public TodoDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<TodoDbContext>();
-            optionsBuilder.UseSqlServer("Server=LAPTOP-IAJ1J0A2;Database=todo_01simple;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
+            optionsBuilder.UseSqlServer(args[0]);
 
             return new TodoDbContext(optionsBuilder.Options);
         }

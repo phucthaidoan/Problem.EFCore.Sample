@@ -7,14 +7,15 @@ using TotoFunctionApp;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWebApplication()
-    .ConfigureServices(services =>
+    .ConfigureServices((context, services) =>
     {
         services.AddApplicationInsightsTelemetryWorkerService();
         services.ConfigureFunctionsApplicationInsights();
+        var connectionString = context.Configuration.GetSection("ConnectionString").Value;
         services.AddDbContext<TodoDbContext>((sp, options) =>
         {
             options
-                .UseSqlServer("Server=LAPTOP-IAJ1J0A2;Database=todo_01simple;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
+                .UseSqlServer(connectionString);
         });
         services.AddScoped<IPlanService, PlanService>();
     })
