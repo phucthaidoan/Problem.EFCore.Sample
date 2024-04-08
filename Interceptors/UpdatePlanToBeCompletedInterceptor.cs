@@ -7,10 +7,7 @@ namespace Problem.EFCore.Sample.Interceptors
 {
     public class UpdatePlanToBeCompletedInterceptor : SaveChangesInterceptor
     {
-        public override async ValueTask<int> SavedChangesAsync(
-            SaveChangesCompletedEventData eventData,
-            int result,
-            CancellationToken cancellationToken = default)
+        public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
             var todoDbContext = eventData.Context as TodoDbContext;
             if (todoDbContext is not null)
@@ -19,7 +16,7 @@ namespace Problem.EFCore.Sample.Interceptors
                 await HandleModifiedTodoEntitiesAsync(todoDbContext);
             }
 
-            return await base.SavedChangesAsync(eventData, result, cancellationToken);
+            return await base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 
         private async Task HandleModifiedTodoEntitiesAsync(TodoDbContext todoDbContext)
