@@ -9,12 +9,6 @@ namespace Problem.EFCore.Sample.Data
         {
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=LAPTOP-IAJ1J0A2;Database=todo_01simple;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=true");
-        }
-
-
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             // TODO if multiple todo entities are from the same plan => let's resolve it!
